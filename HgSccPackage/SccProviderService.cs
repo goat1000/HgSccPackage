@@ -9,7 +9,6 @@
 // http://www.gnu.org/licenses/gpl-2.0.txt
 // 
 //=========================================================================
-extern alias vs11;
 
 using System;
 using System.ComponentModel;
@@ -31,10 +30,6 @@ using System.Drawing;
 using HgSccPackage.UI;
 using System.Linq;
 using Timer = System.Windows.Forms.Timer;
-
-using __VSDIFFSERVICEOPTIONS = vs11::Microsoft.VisualStudio.Shell.Interop.__VSDIFFSERVICEOPTIONS;
-using IVsDifferenceService = vs11::Microsoft.VisualStudio.Shell.Interop.IVsDifferenceService;
-using SVsDifferenceService = vs11::Microsoft.VisualStudio.Shell.Interop.SVsDifferenceService;
 
 namespace HgSccPackage
 {
@@ -3048,8 +3043,7 @@ namespace HgSccPackage
 		}
 
 		#region IVsSccGlyphs Members
-
-		public int GetCustomGlyphList(uint BaseIndex, out uint pdwImageListHandle)
+		public int GetCustomGlyphList(uint BaseIndex, out IntPtr pdwImageListHandle)
 		{
 			Logger.WriteLine("GetCustomGlyphList");
 
@@ -3077,7 +3071,7 @@ namespace HgSccPackage
 			}
 
 			// Return a Win32 HIMAGELIST handle to our imagelist to the shell (by keeping the ImageList a member of the class we guarantee the Win32 object is still valid when the shell needs it)
-			pdwImageListHandle = (uint)this.customSccGlyphsImageList.Handle;
+			pdwImageListHandle = this.customSccGlyphsImageList.Handle;
 
 			// Return success (If you don't want to have custom glyphs return VSConstants.E_NOTIMPL)
 			return VSConstants.S_OK;
@@ -3239,7 +3233,9 @@ namespace HgSccPackage
 				proxy.ShowDialog();
 			}
 		}
-	}
+
+        
+    }
 
 	//------------------------------------------------------------------
 	class UpdateStatusParams

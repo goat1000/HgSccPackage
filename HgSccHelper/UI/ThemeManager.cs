@@ -25,7 +25,6 @@ namespace HgSccHelper.UI
 	//-----------------------------------------------------------------------------
 	public sealed class ThemeManager
 	{
-		FirstFloor.ModernUI.Windows.Controls.TabLayout tab_layout;
 		List<Theme> themes;
 		ResourceDictionary base_dict;
 
@@ -42,8 +41,8 @@ namespace HgSccHelper.UI
 		//-----------------------------------------------------------------------------
 		private ThemeManager()
 		{
-			// FIXME: implicit load of assembly
-			tab_layout = FirstFloor.ModernUI.Windows.Controls.TabLayout.List;
+			// force load of assembly
+			GC.KeepAlive(typeof(FirstFloor.ModernUI.Windows.Controls.ModernButton));
 
 			base_dict = new ResourceDictionary { Source = new Uri("/HgSccHelper;component/UI/BaseTheme.xaml", UriKind.Relative) };
 
@@ -61,7 +60,7 @@ namespace HgSccHelper.UI
 				ErrorColor = Colors.Red,
 				RevLogLineColor = Colors.Black,
 				RevLogNodeColor = Colors.Blue,
-				AnnotateColor = Colors.Blue
+				AnnotateColor = Colors.Blue,
 			});
 
 			themes.Add(new Theme

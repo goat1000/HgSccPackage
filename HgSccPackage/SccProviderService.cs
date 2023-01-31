@@ -262,8 +262,11 @@ namespace HgSccPackage
 			if (VSConstants.VSCOOKIE_NIL != _tpdTrackProjectDocumentsCookie)
 			{
 				var tpdService = (IVsTrackProjectDocuments2)_sccProvider.GetService(typeof(SVsTrackProjectDocuments));
-				tpdService.UnadviseTrackProjectDocumentsEvents(_tpdTrackProjectDocumentsCookie);
-				_tpdTrackProjectDocumentsCookie = VSConstants.VSCOOKIE_NIL;
+				if (tpdService != null)
+				{
+					tpdService.UnadviseTrackProjectDocumentsEvents(_tpdTrackProjectDocumentsCookie);
+					_tpdTrackProjectDocumentsCookie = VSConstants.VSCOOKIE_NIL;
+				}
 			}
 
 			if (Rdt != null)

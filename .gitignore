@@ -1,14 +1,9 @@
-
 .vs/
-
 packages/
-
 HgSccPackage/obj/
-
 HgSccPackage/bin/
-
 HgSccHelper/bin/
-
 HgSccHelper/obj/
-
 *.user
+.hg*
+.editorconfig
